@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Lib\Generator.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Lib\optparser.py">
       <SubType>Code</SubType>
     </Compile>
@@ -31,9 +34,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="onionploit.py" />
+    <Compile Include="Payloads\linux\reverse_tcp_shell.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Payloads\Windows\reverse_tcp_shell.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Lib\" />
+    <Folder Include="Sources\" />
     <Folder Include="Payloads\" />
     <Folder Include="Payloads\linux\" />
     <Folder Include="Payloads\Windows\" />

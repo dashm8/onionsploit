@@ -1,26 +1,52 @@
 import os
-import threading
+import sys
+import Server
+
 class Console:
     def __init__(self):
         self.state = "start"
-            
-    def handle(self,inp):
+        while 1:
+            handle(input(">"))
+    def handle(self,inp):        
+        if inp == "exit":
+            print("[!] exiting !!!!")
+            sys.exit()
         if inp.startswith("set"):
+            try:
+                self.payload = inp.split(" ")[1]             
+            except IndexError:
+                print("[!] no payload was entered")
+                return None
+            if not os.path.isfile(self.payload):
+               print("[!] no such payload") 
+               return None
+            self.state = "payloadoption"
+            setoption()
+        if inp.startswith("gen"):
             try:
                 self.payload = inp.split(" ")[1]
             except IndexError:
                 print("[!] no payload was entered")
+                return None
             if not os.path.isfile(self.payload):
-               print("[!] no such payload") 
-            self.state = "payloadoption"
-            
+                print("[!] no such payload")
+                return None
+            Generator.generatepayload(self.payload)
+
     def setoption(self):
         rport = 0
         while 1:
             cmd = input(self.payload + ">")
             if cmd == "exploit":
                 if rport != 0:
-                    print("[!] starting exploit at: " +  str(rport))
-                    
-
+                    print("[+] starting exploit at: " +  str(rport))
+                    s = Server.Server(rport,self.payload)
+                    s.run()
+                else:
+                    print("[!] you must enter a port number")
+            if cmd.startswith("rport =") or cmd.startswith("rport="):
+                rport = int(cmd.split(" ")[1])
+            if cmd == "exit":
+                print("[!] exiting")
+                return None
 
