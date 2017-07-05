@@ -1,6 +1,7 @@
 import os
 import sys
 import Server
+import Generator
 
 class Console:
     def __init__(self):
@@ -31,7 +32,7 @@ class Console:
             if not os.path.isfile(self.payload):
                 print("[!] no such payload")
                 return None
-            Generator.generatepayload(self.payload)
+            g = Generator.Generator(self.payload,input("enter port: "),input("enter .onion url: "))
 
     def setoption(self):
         rport = 0
@@ -39,7 +40,7 @@ class Console:
             cmd = input(self.payload + ">")
             if cmd == "exploit":
                 if rport != 0:
-                    print("[+] starting exploit at: " +  str(rport))
+                    print("[+] starting exploit at: " +  str(rport))                    
                     s = Server.Server(rport,self.payload)
                     s.run()
                 else:

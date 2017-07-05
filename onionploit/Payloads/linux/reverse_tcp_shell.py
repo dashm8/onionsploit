@@ -1,4 +1,4 @@
-#python Revrese shell payload with tor
+#this file never actually being used as a payload just a template
 import socket
 import os
 import socks
