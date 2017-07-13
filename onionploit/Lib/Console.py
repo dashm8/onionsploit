@@ -1,6 +1,6 @@
 import os
 import sys
-import Server
+from TCPServer import Server
 import Generator
 
 class Console:
@@ -51,5 +51,6 @@ class Console:
             if cmd == "exit":
                 print("[!] exiting")
                 return None
+
 
 
