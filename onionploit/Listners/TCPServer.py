@@ -3,7 +3,7 @@ import time
 import _thread
 import os
 import subprocess
-import Generator
+import Lib.Generator
 
 
 class Server:

@@ -1,13 +1,16 @@
 import os
 import sys
-import Server
-import Generator
+from Listners.TCPServer import Server
+import Lib.Generator
 
 class Console:
+    def run(self):
+        while 1:
+            self.handle(input("onionsploit/>"))
+
     def __init__(self):
         self.state = "start"
-        while 1:
-            handle(input(">"))
+        self.run()
 
     def handle(self,inp):        
         if inp == "exit":
@@ -23,7 +26,7 @@ class Console:
                print("[!] no such payload") 
                return None
             self.state = "payloadoption"
-            setoption()
+            self.setoption()
         if inp.startswith("gen"):
             try:
                 self.payload = inp.split(" ")[1]
@@ -42,7 +45,7 @@ class Console:
             if cmd == "exploit":
                 if rport != 0:
                     print("[+] starting exploit at: " +  str(rport))                    
-                    s = Server.Server(rport,self.payload)
+                    s = Server(rport,self.payload)
                     s.run()
                 else:
                     print("[!] you must enter a port number")
@@ -53,3 +56,4 @@ class Console:
                 return None
 
 
+c = Console()

@@ -42,7 +42,7 @@ class Console:
             if cmd == "exploit":
                 if rport != 0:
                     print("[+] starting exploit at: " +  str(rport))                    
-                    s = Server.Server(rport,self.payload)
+                    s = Server(rport,self.payload)
                     s.run()
                 else:
                     print("[!] you must enter a port number")
@@ -54,3 +54,7 @@ class Console:
 
 
 
+def __main__():
+    c = Console()
+
+__main__()
