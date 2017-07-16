@@ -21,28 +21,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Lib\Console.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Lib\Generator.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Listners\HiddenService.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Listners\HTTPServer.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Listners\TCPServer.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Listners\SSHServer.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="onionploit.py" />
-    <Compile Include="Payloads\linux\reverse_ssh_shell.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Payloads\linux\reverse_tcp_shell.py">
       <SubType>Code</SubType>
     </Compile>
@@ -57,7 +45,7 @@
     <Folder Include="Payloads\Windows\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Payloads\Windows\DownloadTor.ps1" />
+    <Content Include="setup.sh" />
     <Content Include="Sources\requirements.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

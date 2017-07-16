@@ -12,10 +12,16 @@ class Console:
         self.state = "start"
         self.run()
 
+    def listpayloads():
+        for files in os.listdir("~/Payloads/"):
+            print(files)
+
     def handle(self,inp):        
         if inp == "exit":
             print("[!] exiting !!!!")
             sys.exit()
+        if inp == "list payloads":
+            listpayloads()
         if inp.startswith("set"):
             try:
                 self.payload = inp.split(" ")[1]             
@@ -28,6 +34,11 @@ class Console:
             self.state = "payloadoption"
             self.setoption()
         if inp.startswith("gen"):
+            data = input("[!] do you want to compile the python payload(y:n) ")
+            if data == "y":
+                opts = {"compile" : True}
+            if data == "n":
+                opts = {"compile" : False}
             try:
                 self.payload = inp.split(" ")[1]
             except IndexError:
@@ -36,7 +47,7 @@ class Console:
             if not os.path.isfile(self.payload):
                 print("[!] no such payload")
                 return None
-            g = Generator.Generator(self.payload,input("enter port: "),input("enter .onion url: "))
+            g = Generator.Generator(self.payload,input("enter port: "),input("enter .onion url: "),opts)
 
     def setoption(self):
         rport = 0
@@ -50,10 +61,12 @@ class Console:
                 else:
                     print("[!] you must enter a port number")
             if cmd.startswith("rport =") or cmd.startswith("rport="):
-                rport = int(cmd.split(" ")[1])
+                rport = int(cmd.split("=")[1])            
             if cmd == "exit":
                 print("[!] exiting")
                 return None
+
+
 
 
 c = Console()

