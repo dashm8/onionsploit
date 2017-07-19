@@ -21,6 +21,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="botnet\Controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="botnet\LinuxBot.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Lib\Generator.py">
       <SubType>Code</SubType>
     </Compile>
@@ -39,6 +45,7 @@
   <ItemGroup>
     <Folder Include="Lib\" />
     <Folder Include="Listners\" />
+    <Folder Include="botnet\" />
     <Folder Include="Sources\" />
     <Folder Include="Payloads\" />
     <Folder Include="Payloads\linux\" />

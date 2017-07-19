@@ -15,6 +15,7 @@ def DownloadTor():
         os.system("tar -xf tor-browser-linux64-7.0.1_en-US.tar.xz")
         os.system("tor-browser_en-US/Browser/TorBrowser/Tor/tor")
 
+DownloadTor()
 socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050, True)
 s = socks.socksocket()
 s.connect((OnionUrl, PORT))
