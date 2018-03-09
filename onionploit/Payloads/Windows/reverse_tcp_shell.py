@@ -12,7 +12,7 @@ OnionUrl = ""
 PORT = int("")
 
 def DownloadTor():
-    urllib.request.urlretrieve("https://www.torproject.org/dist/torbrowser/7.0.1/torbrowser-install-7.0.1_en-US.exe",'~/tordown.exe')
+    urllib.request.urlretrieve("https://www.torproject.org/dist/torbrowser/7.5/torbrowser-install-7.5_en-US.exe",'~/tordown.exe')
     os.system("tordown.exe /S")
     user = subprocess.check_output("echo %USERNAME%",shell=True)
     os.system("C:/Users/"+user+"/Desktop/Tor Browser/Browser/TorBrowser/Tor/tor.exe --service install")

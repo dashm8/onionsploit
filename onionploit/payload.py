@@ -6,10 +6,8 @@ import urllib
 import subprocess
 from time import sleep
 
-#constents
-OnionUrl = "" #your onion url hidden service
-PORT = 4444 #the port...
-
+OnionUrl = "pdzt7npmbjrlymhe.onion"
+PORT = 4445
 def DownloadTor():
         os.system("wget https://www.torproject.org/dist/torbrowser/7.5/tor-browser-linux32-7.5_en-US.tar.xz")
         os.system("tar -xf tor-browser-linux32-7.5_en-US.tar.xz")

