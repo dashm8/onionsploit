@@ -1,6 +1,6 @@
 import socket
 import time
-import _thread
+import thread
 import os
 import subprocess
 from Lib.Generator import Generator
@@ -31,7 +31,7 @@ class Server:
         self.sock.bind(("127.0.0.1",self.port))        
         self.sock.listen(5)        
         counter = 1
-        _thread.start_new_thread(self.handler,())
+        thread.start_new_thread(self.handler,())
         while 1:
             try:            
                 conn,addr = self.sock.accept()
